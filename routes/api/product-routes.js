@@ -63,11 +63,21 @@ router.get('/:id', (req, res) => {
       }
     ]
   })
-  .then(dbPostData => res.json(dbPostData))
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
+  .then(dbProductData => {
+    // see if a product matched the id
+    if(!dbProductData) {
+        // if not, send a respone
+        res.status(404).json({ message: 'No product found with this id'});
+        return;
+    }
+    // if so, send the data
+    res.json(dbProductData);
+  })
+  // if there is an err catch it and send a response
+  .catch(err => {
+      console.log(err);
+      res.status(500).json(err)
+  });
 });
 
 // create new product
