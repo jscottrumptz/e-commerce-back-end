@@ -112,8 +112,8 @@ router.delete('/:id', (req, res) => {
     where: {
         id: req.params.id
     }
-})
-.then(dbTagData => {
+  })
+  .then(dbTagData => {
     // see if there is a matching id
     if (!dbTagData) {
         res.status(404).json({ message: 'No tag found with this id' });
